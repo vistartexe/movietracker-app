@@ -53,6 +53,7 @@ public class SessionManager {
      * Pengguna dikembalikan ke halaman Login (bukan crash).
      */
     public static void redirectToLogin(Activity activity) {
+        new SessionManager(activity).logout();
         Toast.makeText(activity,
                 "Data pengguna tidak ditemukan. Silakan login ulang.",
                 Toast.LENGTH_LONG).show();

@@ -26,6 +26,9 @@ public class Constants {
     public static final String GENRE_ROMANCE = "Romance";
     public static final String GENRE_SCIFI = "Sci-Fi";
 
+    // ===== Groq API =====
+    public static final String GROQ_API_KEY = "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";
+
     private Constants() {
         // Kelas utilitas, tidak perlu dibuat objeknya
     }

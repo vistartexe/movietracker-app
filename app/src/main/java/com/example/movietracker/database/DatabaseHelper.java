@@ -17,7 +17,7 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "movie_picker.db";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     // ===== Nama tabel =====
     private static final String TABLE_USERS = "users";
@@ -90,12 +90,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Untuk tugas kuliah: hapus semua tabel lalu buat ulang.
+        rebuildIfSchemaInvalid(db);
+    }
+
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Default Android melempar exception saat downgrade (aplikasi langsung tertutup).
+        rebuildIfSchemaInvalid(db);
+    }
+
+    /**
+     * Database lama dipertahankan jika skemanya masih cocok. Jika tabel users dari versi
+     * lama tidak punya kolom yang dibutuhkan (mis. password_hash), query login akan
+     * melempar SQLiteException dan aplikasi crash, sehingga tabel dibuat ulang.
+     */
+    private void rebuildIfSchemaInvalid(SQLiteDatabase db) {
+        if (hasColumns(db, TABLE_USERS, "id", "full_name", "username", "email", "password_hash")
+                && hasColumns(db, TABLE_MOVIES, "id", "title", "genre", "year", "synopsis", "poster")
+                && hasColumns(db, TABLE_FAVORITES, "id", "user_id", "movie_id")
+                && hasColumns(db, TABLE_RATINGS, "id", "user_id", "movie_id", "score", "updated_at")) {
+            return;
+        }
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RATINGS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MOVIES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         onCreate(db);
+    }
+
+    private boolean hasColumns(SQLiteDatabase db, String table, String... required) {
+        java.util.Set<String> found = new java.util.HashSet<>();
+        Cursor c = db.rawQuery("PRAGMA table_info(" + table + ")", null);
+        try {
+            int nameIdx = c.getColumnIndex("name");
+            while (c.moveToNext()) {
+                found.add(c.getString(nameIdx).toLowerCase(java.util.Locale.ROOT));
+            }
+        } finally {
+            c.close();
+        }
+        for (String col : required) {
+            if (!found.contains(col)) return false;
+        }
+        return true;
     }
 
     // =====================================================================
@@ -244,6 +281,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // =====================================================================
 
     /** Mengambil semua film dalam satu genre, lengkap dengan rata-rata rating. */
+    public List<Movie> getAllMovies() {
+        return readMovieList(getReadableDatabase().rawQuery(MOVIE_SELECT + " GROUP BY m.id ORDER BY m.title", null));
+    }
+
     public List<Movie> getMoviesByGenre(String genre) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(

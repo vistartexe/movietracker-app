@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_image"
+    android:background="@color/bg_dark"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -69,9 +69,15 @@
                     android:layout_margin="6dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@color/genre_action"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="4dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/poster_action"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Action Genre" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -79,11 +85,7 @@
                         android:gravity="center"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="💥"
-                            android:textSize="44sp" />
+                        <ImageView android:layout_width="48dp" android:layout_height="48dp" android:padding="8dp" android:background="@drawable/ui_icon_bg" android:src="@drawable/ui_bolt" android:importantForAccessibility="no"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -103,9 +105,15 @@
                     android:layout_margin="6dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@color/genre_comedy"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="4dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/poster_comedy"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Comedy Genre" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -113,18 +121,14 @@
                         android:gravity="center"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="😂"
-                            android:textSize="44sp" />
+                        <ImageView android:layout_width="48dp" android:layout_height="48dp" android:padding="8dp" android:background="@drawable/ui_icon_bg" android:src="@drawable/ui_smile" android:importantForAccessibility="no"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="@string/genre_comedy"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textSize="18sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -145,9 +149,15 @@
                     android:layout_margin="6dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@color/genre_horror"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="4dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/poster_horror"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Horror Genre" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -155,11 +165,7 @@
                         android:gravity="center"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="👻"
-                            android:textSize="44sp" />
+                        <ImageView android:layout_width="48dp" android:layout_height="48dp" android:padding="8dp" android:background="@drawable/ui_icon_bg" android:src="@drawable/ui_ghost" android:importantForAccessibility="no"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -179,9 +185,15 @@
                     android:layout_margin="6dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@color/genre_romance"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="4dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/poster_romance"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Romance Genre" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -189,11 +201,7 @@
                         android:gravity="center"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="💖"
-                            android:textSize="44sp" />
+                        <ImageView android:layout_width="48dp" android:layout_height="48dp" android:padding="8dp" android:background="@drawable/ui_icon_bg" android:src="@drawable/ui_heart" android:importantForAccessibility="no"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -215,9 +223,15 @@
                     android:layout_margin="6dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@color/genre_scifi"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="4dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/poster_scifi"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Sci-Fi Genre" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -225,11 +239,7 @@
                         android:gravity="center"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="🚀"
-                            android:textSize="44sp" />
+                        <ImageView android:layout_width="48dp" android:layout_height="48dp" android:padding="8dp" android:background="@drawable/ui_icon_bg" android:src="@drawable/ui_rocket" android:importantForAccessibility="no"/>
 
                         <TextView
                             android:layout_width="wrap_content"

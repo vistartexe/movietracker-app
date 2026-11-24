@@ -101,5 +101,13 @@
             android:layout_marginTop="12dp"
             android:text="@string/btn_go_register" />
 
+        <TextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lupa Password?"
+            android:textColor="#FF0000"
+            android:padding="8dp" />
+
     </LinearLayout>
 </ScrollView>

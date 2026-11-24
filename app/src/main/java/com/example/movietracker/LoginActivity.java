@@ -46,6 +46,11 @@ public class LoginActivity extends AppCompatActivity {
 
         findViewById(R.id.btnLogin).setOnClickListener(v -> attemptLogin());
 
+        findViewById(R.id.tvForgotPassword).setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
+        });
+
         // Tombol "Done" di keyboard juga menjalankan login
         etPassword.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -81,7 +86,15 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        User user = databaseHelper.loginUser(input, password);
+        User user;
+        try {
+            user = databaseHelper.loginUser(input, password);
+        } catch (Exception e) {
+            android.util.Log.e("LoginActivity", "Gagal membaca database saat login", e);
+            Toast.makeText(this, "Gagal membaca data akun. Coba lagi atau daftar ulang.",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
 
         if (user == null) {
             Toast.makeText(this, "Username/email atau password salah",
@@ -100,7 +113,9 @@ public class LoginActivity extends AppCompatActivity {
         intent.putExtra(Constants.EXTRA_USER_ID, userId);
         intent.putExtra(Constants.EXTRA_USERNAME, username);
         intent.putExtra(Constants.EXTRA_FULL_NAME, fullName);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish(); // agar tombol Back dari Home tidak kembali ke Login
     }
+
 }

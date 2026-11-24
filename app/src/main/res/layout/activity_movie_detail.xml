@@ -201,6 +201,8 @@
                 android:layout_marginTop="12dp"
                 android:text="@string/btn_submit_rating" />
 
+            <com.google.android.material.button.MaterialButton android:id="@+id/btnWatch" app:icon="@drawable/ui_play" style="@style/Widget.MoviePicker.OutlinedButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Tonton di mana" />
+            <com.google.android.material.button.MaterialButton android:id="@+id/btnTickets" app:icon="@drawable/ui_ticket" style="@style/Widget.MoviePicker.OutlinedButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Tiket resmi" />
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnViewFavorites"
                 style="@style/Widget.MoviePicker.OutlinedButton"

@@ -86,6 +86,14 @@ public class MovieDetailActivity extends AppCompatActivity {
             return;
         }
         showMovie(movie);
+        findViewById(R.id.btnWatch).setOnClickListener(v -> new androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("Cari platform resmi").setMessage("Ketersediaan film belum diverifikasi. Cari judul di platform berikut.")
+            .setItems(new String[]{"Netflix", "Prime Video", "Disney+"}, (d, which) -> {
+                String[] urls={"https://www.netflix.com/search?q="+android.net.Uri.encode(movie.getTitle()), "https://www.primevideo.com/", "https://www.disneyplus.com/"};
+                openOfficial(urls[which]); }).show());
+        findViewById(R.id.btnTickets).setOnClickListener(v -> new androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("Penjual tiket resmi").setMessage("Periksa jadwal dan ketersediaan pada situs resmi. Film ini belum tentu sedang tayang.")
+            .setItems(new String[]{"Cinema XXI", "CGV", "TIX ID"}, (d, which) -> openOfficial(new String[]{"https://www.cinema21.co.id/", "https://www.cgv.id/", "https://www.tix.id/"}[which])).show());
         refreshFavoriteButton();
         refreshUserRating();
 
@@ -199,5 +207,9 @@ public class MovieDetailActivity extends AppCompatActivity {
             ratingBar.setRating(0);
             tvUserRating.setText("Kamu belum memberi rating");
         }
+    }
+    private void openOfficial(String url) {
+        try { startActivity(new Intent(Intent.ACTION_VIEW, android.net.Uri.parse(url))); }
+        catch (android.content.ActivityNotFoundException e) { Toast.makeText(this,"Browser tidak tersedia",Toast.LENGTH_SHORT).show(); }
     }
 }
