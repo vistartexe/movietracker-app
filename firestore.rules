@@ -1,0 +1,28 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Check if user is authenticated via Firebase Auth
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Rules for rooms
+    match /rooms/{roomCode} {
+      allow read, create: if isAuthenticated();
+      allow update, delete: if isAuthenticated();
+
+      // Rules for participants subcollection
+      match /participants/{userId} {
+        allow read, create, update: if isAuthenticated();
+        allow delete: if isAuthenticated();
+      }
+
+      // Rules for votes subcollection (Each user can only write their own votes)
+      match /votes/{userId} {
+        allow read: if isAuthenticated();
+        allow create, update, delete: if isAuthenticated() && request.auth.uid == userId;
+      }
+    }
+  }
+}
